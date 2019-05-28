@@ -14,6 +14,31 @@ some tools for becoming a better developer(实际上是因为开直播不能总�
 4. 第一版比较粗糙没有判断周六日和节假日，没有换掉ip，配置文件写死等问题，第二版的时候我会修复这些问题
 ```
 
+### auto_follow_in_github
+#### 这个小脚本该不会该死的要烂尾了吧哈哈哈哈哈 暂时并不想搞了，爸爸只想快点看书然后走人。
+#### get_sesson_api: https://github.com/session post
+```python
+form:
+    commit: Sign in
+    utf8: ✓
+    authenticity_token: 1hx81sFYNIPg27K5iwfRY0V+lG2BeI4DBdZVaMcLKeZ49ez9F1FizVhnpF6aQp+fjOtOq8scD5T0DGcYN2kH8g==
+    login: 1125862926@qq.com
+    password: jxjzgsrl43
+    webauthn-support: supported
+```
+#### login_api: https://github.com/login
+```python
+
+```
+
+### broke__jsl_clearance
+#### 这个项目主要针对的是破解银保监，破解加速乐的反爬虫机制
+#### 不足：
+> 1. 正则表达式写的不够高级，现在看上去还比较弱智，目前只是解决了基础问题
+> 2. 虽然用了面向对象的写法，但是没有分文件写，看上去还是比较混乱，暂时不想管了
+> 3. 因为我没学过js，所以无法通过使用python来实现js脚本相同功能，这是一个短板吧
+#### 仅供个人学习参考，欢迎发邮件或者加QQ与我交流，如果合适的工作机会，当然也欢迎提供给我～～～～～哈哈哈哈
+
 
 
 

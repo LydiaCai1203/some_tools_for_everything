@@ -55,7 +55,7 @@ class Github:
             'l': 'Python',               # language
             'o': 'desc',                 # 排序方式 降序
             'p': '1',                    # 页码
-            'q': 'cat stars:>50',        # 这个参数优先级好像没有l的高
+            'q': 'stars:>50',        # 这个参数优先级好像没有l的高
             's': 'stars',                # 排序标准
             'type': 'Repositories',      # 希望得到的返回结果的类型
         }
@@ -67,16 +67,16 @@ class Github:
             resp = self.session.get(FIND_URL, params=query_params, cookies=self.session.cookies.get_dict())
         except Exception as e:
             print(str(e))
-
-        tree = etree.HTML(resp.text)
-        masters = tree.xpath('//ul[@class="repo-list"]//li//div[1]/h3/a/@href')
-        for master in masters:
-            mast = master.split('/')[1]
-            resp = self.session.post(FOLLOW_URL, params={'target': mast}, cookies=self.session.cookies.get_dict(), data=body)
-            print(resp.status_code)
-            print(resp.request.url)
-            print(resp.request.headers)
-            print(body)
+        print(resp.request.url)
+        # tree = etree.HTML(resp.text)
+        # masters = tree.xpath('//ul[@class="repo-list"]//li//div[1]/h3/a/@href')
+        # for master in masters:
+        #     mast = master.split('/')[1]
+        #     resp = self.session.post(FOLLOW_URL, params={'target': mast}, cookies=self.session.cookies.get_dict(), data=body)
+        #     print(resp.status_code)
+        #     print(resp.request.url)
+        #     print(resp.request.headers)
+        #     print(body)
 
             
 
