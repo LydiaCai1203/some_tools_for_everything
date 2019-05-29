@@ -5,6 +5,7 @@ __msg__ = “”“
             1. 每次得到的js动态生成的cookie在redis中保留半小时
             2. 每15s爬一次银保监的所有源
             3. 当redis中的cookie过期以后，每隔两分钟尝试获取一次js动态生成的cookie，直到取到为止
+            4. 如果你看到了我写的这个脚本 自己 在装一个redis，或者加上redis_config，连远程的redis
         ”“”
 """
 import re
@@ -13,16 +14,11 @@ import json
 
 import redis
 import execjs
+import jsbeautifier
 import requests
 from lxml import etree
 from urllib.parse import urljoin
 
-
-REDIS_CONFIG = {
-    'host': '127.0.0.1',
-    'port': 6379,
-    'decode_responses': True,
-}
 
 YINBAOJIAN_COOKIES_KEY = 'yinbaojian_cookies'
 
@@ -45,7 +41,7 @@ class YinbaojianCookieGeter:
     def __init__(self):
         self.url = 'http://www.cbrc.gov.cn/chinese/zhengcefg.html'
         self.session = requests.session()
-        self.rc = redis.Redis(**REDIS_CONFIG, db=6)
+        self.rc = redis.Redis(db=6)
         
     def js_decode_first(self):
         try:
@@ -57,6 +53,7 @@ class YinbaojianCookieGeter:
         html_521 = html_521.replace('eval', 'return')
         obj_521 = execjs.compile(html_521)
         decoded_js = obj_521.call('f')
+        # print(decoded_js)
         return decoded_js
     
     def js_decode_second(self, decoded_js):
@@ -93,6 +90,11 @@ class YinbaojianCookieGeter:
 
         # 添加上return cookie
         decoded_js = decoded_js[:-2] + ';return cookie;' + decoded_js[-2:]
+
+        print(decoded_js)
+        decoded_js = jsbeautifier.beautify(decoded_js)
+        print("=========")
+        # print(decoded_js)
 
         return decoded_js
 
@@ -163,8 +165,3 @@ if __name__ == '__main__':
     spider = YinbaijianSpider(cookies)
     spider.paw(URLS)
     time.sleep(15)
-
-    
-    
-    
-
