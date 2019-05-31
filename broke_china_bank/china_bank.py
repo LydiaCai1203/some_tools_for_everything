@@ -1,3 +1,7 @@
+"""
+    中国人民银行的网站的js是加密过的，变量名全都十六进制加密过
+    暂时也不知道该怎么弄了，有点无语
+"""
 import re
 import time
 import json
@@ -28,7 +32,7 @@ def start_requests():
     print(html_521)
     html_521 = html_521.replace('eval', 'return')
     obj_521 = execjs.compile(html_521)
-    decoded_js = obj_521.call('r')    # p,a,c,k,e,r
+    decoded_js = obj_521.call('r')
     print(decoded_js)
 
 start_requests()
