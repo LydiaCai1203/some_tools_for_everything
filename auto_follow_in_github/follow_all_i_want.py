@@ -1,7 +1,5 @@
-"""
-今天和黄老师还有欧阳老师一起吃了饭
+import time
 
-"""
 import requests
 from lxml import etree
 
@@ -49,41 +47,56 @@ class Github:
         print(self.session.cookies.get_dict())
 
 
-    def find_master(self):
+    def find_master(self, page):
         query_params = {
             'l': 'Python',               # language
             'o': 'desc',                 # 排序方式 降序
-            'p': '1',                    # 页码
-            'q': 'stars:>50',        # 这个参数优先级好像没有l的高
+            'p': str(page),              # 页码
+            'q': 'stars:>50',            # 这个参数优先级好像没有l的高
             's': 'stars',                # 排序标准
             'type': 'Repositories',      # 希望得到的返回结果的类型
         }
         body = {
+            'commit': 'Follow',
             'utf8': '✓',
-            'authenticity_token': self.authenticity_token,
         }
         try:
             resp = self.session.get(FIND_URL, params=query_params, cookies=self.session.cookies.get_dict())
         except Exception as e:
             print(str(e))
-        print(resp.request.url)
-        # tree = etree.HTML(resp.text)
-        # masters = tree.xpath('//ul[@class="repo-list"]//li//div[1]/h3/a/@href')
-        # for master in masters:
-        #     mast = master.split('/')[1]
-        #     resp = self.session.post(FOLLOW_URL, params={'target': mast}, cookies=self.session.cookies.get_dict(), data=body)
-        #     print(resp.status_code)
-        #     print(resp.request.url)
-        #     print(resp.request.headers)
-        #     print(body)
 
+        tree = etree.HTML(resp.text)
+        masters = tree.xpath('//ul[@class="repo-list"]//li//div[1]/h3/a/@href')
+        for master in masters:
+            mast = master.split('/')[1]
+            
+            # 要先进入主页 才能拿到在form里面里面hidden的authenticity_token元素的值
+            MAST_PROFILE = f'https://github.com/{mast}'
+            resp = self.session.get(MAST_PROFILE, cookies=self.session.cookies.get_dict())
+            tree = etree.HTML(resp.text)
+            auth_tokens = tree.xpath('//span[@class="follow"]//input[@name="authenticity_token"]//@value')
+            
+            # 如果是组织的话就找不到对应的authenticity_token了
+            if not auth_tokens:
+                continue
+            body.update({'authenticity_token': auth_tokens[0]})
+
+            # 拿到authenticity_token才是关注大佬的操作
+            resp = self.session.post(FOLLOW_URL, params={'target': mast}, cookies=self.session.cookies.get_dict(), data=body)
+            print('u will follow:', mast, resp.status_code)
+            time.sleep(0.5)
             
 
 
 
-
 if __name__ == '__main__':
+    USERNAME = input('please enter your github account: \n')
+    PASSWORD = input('please enter your github password: \n')
+    PAGES = input('enter pages u want to search: \n')
     obj = Github(USERNAME, PASSWORD)
     obj.get_authenticity_token()
     obj.get_session()
-    obj.find_master()
+    for page in range(1, int(PAGES)+1):
+        print('current page is :', page)
+        obj.find_master(page)
+        time.sleep(0.1)
