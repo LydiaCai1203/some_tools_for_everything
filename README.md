@@ -15,19 +15,11 @@ some tools for becoming a better developer(实际上是因为开直播不能总�
 ```
 
 ### auto_follow_in_github
-#### 这个小脚本该不会该死的要烂尾了吧哈哈哈哈哈 暂时并不想搞了，爸爸只想快点看书然后走人。
-#### get_sesson_api: https://github.com/session post
+##### 大概是一个月前开的坑吧 现在才填上 这个脚本主要实现 关注 拥有50stars以上的repo的大佬
+##### 非要说意义在哪里的话 意义就是... 关注起来比较方便一点吧
 ```python
-form:
-    commit: Sign in
-    utf8: ✓
-    authenticity_token: pass
-    password: pass
-    webauthn-support: supported
-```
-#### login_api: https://github.com/login
-```python
-
+1. python follow_all_i_want.py
+2. 输入你的github账号和密码以及你想要关注的前多少页的人。
 ```
 
 ### broke__jsl_clearance
@@ -36,7 +28,15 @@ form:
 > 1. 正则表达式写的不够高级，现在看上去还比较弱智，目前只是解决了基础问题
 > 2. 虽然用了面向对象的写法，但是没有分文件写，看上去还是比较混乱，暂时不想管了
 > 3. 因为我没学过js，所以无法通过使用python来实现js脚本相同功能，这是一个短板吧
-#### 仅供个人学习参考，欢迎发邮件或者加QQ与我交流，如果合适的工作机会，当然也欢迎提供给我～～～～～哈哈哈哈
+
+
+### bilibili_get_latiao
+##### 新开的坑 应该也不难 实现一下之前答应各位的 一个在b站自动签到领辣条的程序
+```python 
+```
+
+
+#### 仅供个人学习参考，欢迎发邮件或者加QQ与我交流，如果合适的工作机会，当然也欢迎提供给我
 
 
 
