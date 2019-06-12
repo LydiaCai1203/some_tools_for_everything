@@ -6,8 +6,7 @@ import requests
 from lxml import etree
 
 from config import (
-    LOGIN_URL, SESSION_URL, GITHUB_URL, HEADERS, FIND_URL,
-    FOLLOW_URL, USERNAME, PASSWORD)
+    LOGIN_URL, SESSION_URL, GITHUB_URL, HEADERS, FIND_URL, FOLLOW_URL)
 
 
 class Github:
