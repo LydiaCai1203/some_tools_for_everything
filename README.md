@@ -21,9 +21,8 @@ some tools for becoming a better developer(实际上是因为开直播不能总�
 form:
     commit: Sign in
     utf8: ✓
-    authenticity_token: 1hx81sFYNIPg27K5iwfRY0V+lG2BeI4DBdZVaMcLKeZ49ez9F1FizVhnpF6aQp+fjOtOq8scD5T0DGcYN2kH8g==
-    login: 1125862926@qq.com
-    password: jxjzgsrl43
+    authenticity_token: pass
+    password: pass
     webauthn-support: supported
 ```
 #### login_api: https://github.com/login
