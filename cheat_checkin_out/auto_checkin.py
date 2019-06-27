@@ -10,6 +10,18 @@ headers = {
     'Accept-Language': 'zh-Hans-CN',
     'Accept-Encoding': 'gzip',
 }
+festival = {
+    '9-13': '中秋',
+    '9-14': '中秋',
+    '9-15': '中秋',
+    '10-1': '国庆',
+    '10-2': '国庆',
+    '10-7': '国庆',
+}
+special = {
+    '9-29': '上班',
+    '10-12': '上班',
+}
 
 
 def get_location(session):
