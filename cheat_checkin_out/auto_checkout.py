@@ -1,6 +1,7 @@
 import time
 import random
 import requests
+from holiday import Holiday
 
 BASE_URL = 'http://106.15.179.143:89/client.do'
 USERNAME = 'username'
@@ -119,7 +120,10 @@ def start_cheat():
     print('logout_result', logout_result)  
 
 if __name__ == '__main__':
-    sleep_seconds = 60*20
-    time.sleep(random.randint(1, sleep_seconds))
-    print(sleep_seconds)
-    start_cheat()
+    h = Holiday()
+    if not h.isHoliday():
+        minute = [i for i in range(1, 35, 5)] + [j for j in range(3, 40, 2)]
+        sleep_seconds = random.choice(minute) * 60
+        print(sleep_seconds)
+        time.sleep(sleep_seconds)
+        start_cheat()
