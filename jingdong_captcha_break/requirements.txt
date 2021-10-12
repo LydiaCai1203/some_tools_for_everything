@@ -1,4 +1,4 @@
 selenium==3.141.0
 numpy==1.15.4
-opencv_python==3.4.3.18
+opencv_python==4.2.0.32
 Pillow==5.3.0
